@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Car Parts Lookup</title>
-<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <style>
 body { font-family: Arial, sans-serif; margin: 20px; }
 select, input { margin: 5px; padding: 5px; }
@@ -27,7 +26,7 @@ th { background-color: #f2f2f2; }
 <select id="model" disabled><option value="">Select Model</option></select>
 
 <label for="search">Search Part:</label>
-<input type="text" id="search" placeholder="Type part name..." disabled />
+<input type="text" id="search" placeholder="Type part name or number..." disabled />
 
 <table id="parts-table">
 <thead>
@@ -40,15 +39,6 @@ th { background-color: #f2f2f2; }
 </table>
 
 <script>
-// Automatically load JSON inventory
-fetch('carlist.json')
-  .then(response => response.json())
-  .then(data => {
-      inventory = data;          // store inventory
-      populateYears();           // populate Year dropdown
-      alert('Inventory loaded!'); // optional alert
-  })
-  .catch(error => alert('Failed to load inventory: ' + error));
 let inventory = [];
 let filteredParts = [];
 
@@ -58,23 +48,17 @@ const modelSelect = document.getElementById('model');
 const searchInput = document.getElementById('search');
 const partsTableBody = document.querySelector('#parts-table tbody');
 
+// Fetch the hosted JSON file
+fetch('carlist.json')
+  .then(response => response.json())
+  .then(data => {
+      inventory = data;
+      populateYears();
+      alert('Inventory loaded!');
+  })
+  .catch(error => alert('Failed to load inventory: ' + error));
 
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-        const data = new Uint8Array(evt.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
-        inventory = XLSX.utils.sheet_to_json(sheet);
-
-        alert('Inventory loaded! Select Year → Make → Model.');
-        populateYears();
-    };
-    reader.readAsArrayBuffer(file);
-});
-
+// Populate Year dropdown
 function populateYears() {
     yearSelect.innerHTML = '<option value="">Select Year</option>';
     makeSelect.innerHTML = '<option value="">Select Make</option>'; makeSelect.disabled = true;
@@ -83,10 +67,16 @@ function populateYears() {
     partsTableBody.innerHTML = '';
 
     const years = [...new Set(inventory.map(i => i.Year || i.year))].sort();
-    years.forEach(year => { const option = document.createElement('option'); option.value = year; option.textContent = year; yearSelect.appendChild(option); });
+    years.forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    });
     yearSelect.disabled = false;
 }
 
+// Year selected → populate Make
 yearSelect.addEventListener('change', () => {
     makeSelect.innerHTML = '<option value="">Select Make</option>';
     modelSelect.innerHTML = '<option value="">Select Model</option>';
@@ -99,10 +89,16 @@ yearSelect.addEventListener('change', () => {
     const makes = [...new Set(inventory
         .filter(i => (i.Year || i.year) == yearSelect.value)
         .map(i => i.Make || i.make))].sort();
-    makes.forEach(make => { const option = document.createElement('option'); option.value = make; option.textContent = make; makeSelect.appendChild(option); });
+    makes.forEach(make => {
+        const option = document.createElement('option');
+        option.value = make;
+        option.textContent = make;
+        makeSelect.appendChild(option);
+    });
     makeSelect.disabled = false;
 });
 
+// Make selected → populate Model
 makeSelect.addEventListener('change', () => {
     modelSelect.innerHTML = '<option value="">Select Model</option>';
     searchInput.value = ''; searchInput.disabled = true;
@@ -113,16 +109,23 @@ makeSelect.addEventListener('change', () => {
     const models = [...new Set(inventory
         .filter(i => (i.Year || i.year) == yearSelect.value && (i.Make || i.make) == makeSelect.value)
         .map(i => i.Model || i.model))].sort();
-    models.forEach(model => { const option = document.createElement('option'); option.value = model; option.textContent = model; modelSelect.appendChild(option); });
+    models.forEach(model => {
+        const option = document.createElement('option');
+        option.value = model;
+        option.textContent = model;
+        modelSelect.appendChild(option);
+    });
     modelSelect.disabled = false;
 });
 
+// Model selected → display parts
 modelSelect.addEventListener('change', () => {
     searchInput.value = '';
     searchInput.disabled = !modelSelect.value;
     updatePartsTable();
 });
 
+// Search input → filter parts
 searchInput.addEventListener('input', () => { updatePartsTable(); });
 
 function updatePartsTable() {
@@ -153,5 +156,4 @@ function updatePartsTable() {
 </script>
 
 </body>
-
 </html>
