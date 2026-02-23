@@ -17,9 +17,6 @@ th { background-color: #f2f2f2; }
 
 <h2>Car Parts Lookup</h2>
 
-<input type="file" id="fileInput" accept=".xlsx,.xls,.csv" />
-<br><br>
-
 <label for="year">Year:</label>
 <select id="year" disabled><option value="">Select Year</option></select>
 
@@ -43,6 +40,15 @@ th { background-color: #f2f2f2; }
 </table>
 
 <script>
+// Automatically load JSON inventory
+fetch('carlist.json')
+  .then(response => response.json())
+  .then(data => {
+      inventory = data;          // store inventory
+      populateYears();           // populate Year dropdown
+      alert('Inventory loaded!'); // optional alert
+  })
+  .catch(error => alert('Failed to load inventory: ' + error));
 let inventory = [];
 let filteredParts = [];
 
@@ -52,8 +58,7 @@ const modelSelect = document.getElementById('model');
 const searchInput = document.getElementById('search');
 const partsTableBody = document.querySelector('#parts-table tbody');
 
-document.getElementById('fileInput').addEventListener('change', (e) => {
-    const file = e.target.files[0];
+
     if (!file) return;
 
     const reader = new FileReader();
@@ -148,4 +153,5 @@ function updatePartsTable() {
 </script>
 
 </body>
+
 </html>
