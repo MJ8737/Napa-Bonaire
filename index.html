@@ -50,7 +50,7 @@ const searchInput = document.getElementById('search');
 const partsTableBody = document.querySelector('#parts-table tbody');
 
 // Fetch the hosted JSON file
-fetch('carlist.json')
+fetch('inventory.json')
   .then(response => response.json())
   .then(data => {
       inventory = data;
@@ -159,4 +159,5 @@ function updatePartsTable() {
 </body>
 
 </html>
+
 
