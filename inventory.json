@@ -42,6 +42,34 @@
     "Part Number": "5W30"
   },
   {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Fr.Brake",
+    "Part Number": "SG9522X"
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Rear.Brake",
+    "Part Number": "SG8428CX"
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Belt",
+    "Part Number": "25060495/25060494"
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Waterpump",
+    "Part Number": 41100
+  },
+  {
     "Year": 2014,
     "Make": "KIA",
     "Model": "RIO",
@@ -82,5 +110,292 @@
     "Model": "RIO",
     "Part Name": "Oil",
     "Part Number": "10W40"
+  },
+  {
+    "Year": 2022,
+    "Make": "TOYOTA",
+    "Model": "HILUX DIESEL",
+    "Part Name": "Oil Filter",
+    "Part Number": 1348
+  },
+  {
+    "Year": 2022,
+    "Make": "TOYOTA",
+    "Model": "HILUX DIESEL",
+    "Part Name": "Air filter",
+    "Part Number": "9350/A1531"
+  },
+  {
+    "Year": 2022,
+    "Make": "TOYOTA",
+    "Model": "HILUX DIESEL",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": 230320
+  },
+  {
+    "Year": 2022,
+    "Make": "TOYOTA",
+    "Model": "HILUX DIESEL",
+    "Part Name": "Fuel Filter",
+    "Part Number": "GF0067"
+  },
+  {
+    "Year": 2022,
+    "Make": "TOYOTA",
+    "Model": "HILUX DIESEL",
+    "Part Name": "Glowplug",
+    "Part Number": "GPT25"
+  },
+  {
+    "Year": 2022,
+    "Make": "TOYOTA",
+    "Model": "HILUX DIESEL",
+    "Part Name": "Oil",
+    "Part Number": "15W40"
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Oil Filter",
+    "Part Number": 1348
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Air filter",
+    "Part Number": "A1531"
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": 230320
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Fuel Filter",
+    "Part Number": "GFS3213"
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Sparkplug",
+    "Part Number": 97293
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Oil",
+    "Part Number": "10W40"
+  },
+  {
+    "Year": 2017,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Fr.Brake",
+    "Part Number": "FD2354"
+  },
+  {
+    "Year": 2006,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Oil Filter",
+    "Part Number": 1348
+  },
+  {
+    "Year": 2006,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Air filter",
+    "Part Number": "A0C010"
+  },
+  {
+    "Year": 2006,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": "NO TIN"
+  },
+  {
+    "Year": 2006,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Fuel Filter",
+    "Part Number": "GFS3213"
+  },
+  {
+    "Year": 2006,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Sparkplug",
+    "Part Number": "7787/975"
+  },
+  {
+    "Year": 2006,
+    "Make": "TOYOTA",
+    "Model": "HILUX GAS",
+    "Part Name": "Oil",
+    "Part Number": "10W40"
+  },
+  {
+    "Year": 2008,
+    "Make": "KIA",
+    "Model": "SPORTAGE",
+    "Part Name": "Oil Filter",
+    "Part Number": 1334
+  },
+  {
+    "Year": 2008,
+    "Make": "KIA",
+    "Model": "SPORTAGE",
+    "Part Name": "Air filter",
+    "Part Number": "2834/AF1909"
+  },
+  {
+    "Year": 2008,
+    "Make": "KIA",
+    "Model": "SPORTAGE",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": 232064
+  },
+  {
+    "Year": 2008,
+    "Make": "KIA",
+    "Model": "SPORTAGE",
+    "Part Name": "Fuel Filter",
+    "Part Number": ""
+  },
+  {
+    "Year": 2008,
+    "Make": "KIA",
+    "Model": "SPORTAGE",
+    "Part Name": "Sparkplug",
+    "Part Number": 7090
+  },
+  {
+    "Year": 2008,
+    "Make": "KIA",
+    "Model": "SPORTAGE",
+    "Part Name": "Oil",
+    "Part Number": "10W30"
+  },
+  {
+    "Year": 2022,
+    "Make": "CHANGAN",
+    "Model": "CS32PLUS",
+    "Part Name": "Oil Filter",
+    "Part Number": 1348
+  },
+  {
+    "Year": 2022,
+    "Make": "CHANGAN",
+    "Model": "CS32PLUS",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": 4688
+  },
+  {
+    "Year": 2014,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Oil Filter",
+    "Part Number": 1394
+  },
+  {
+    "Year": 2014,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Air filter",
+    "Part Number": "200125/A3027"
+  },
+  {
+    "Year": 2014,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": "4483/CAB006"
+  },
+  {
+    "Year": 2014,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Fuel Filter",
+    "Part Number": ""
+  },
+  {
+    "Year": 2014,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Sparkplug",
+    "Part Number": "XP3924"
+  },
+  {
+    "Year": 2014,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Oil",
+    "Part Number": "10W30"
+  },
+  {
+    "Year": 2017,
+    "Make": "HYUNDAI",
+    "Model": "CRETA",
+    "Part Name": "Fr.Brake",
+    "Part Number": "PF8806X"
+  },
+  {
+    "Year": 2004,
+    "Make": "TOYOTA",
+    "Model": "YARIS",
+    "Part Name": "Fr.Brake",
+    "Part Number": "FD2183"
+  },
+  {
+    "Year": 2012,
+    "Make": "CHEVROLET",
+    "Model": "SPARK",
+    "Part Name": "Oil Filter",
+    "Part Number": 100001
+  },
+  {
+    "Year": 2012,
+    "Make": "CHEVROLET",
+    "Model": "SPARK",
+    "Part Name": "Air filter",
+    "Part Number": "209672/A52013"
+  },
+  {
+    "Year": 2015,
+    "Make": "ISUZU",
+    "Model": "D-MAX",
+    "Part Name": "Oil Filter",
+    "Part Number": 100088
+  },
+  {
+    "Year": 2015,
+    "Make": "ISUZU",
+    "Model": "D-MAX",
+    "Part Name": "Air filter",
+    "Part Number": "200341/A9618"
+  },
+  {
+    "Year": 2015,
+    "Make": "ISUZU",
+    "Model": "D-MAX",
+    "Part Name": "Fuel Filter",
+    "Part Number": "308429/GF193"
+  },
+  {
+    "Year": 2015,
+    "Make": "ISUZU",
+    "Model": "D-MAX",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": 229363
   }
 ]
