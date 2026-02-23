@@ -1,0 +1,86 @@
+[
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Oil Filter",
+    "Part Number": 1334
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Air filter",
+    "Part Number": 201091
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": "230265/CAB239"
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Fuel Filter",
+    "Part Number": "n/a"
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Sparkplug",
+    "Part Number": ""
+  },
+  {
+    "Year": 2022,
+    "Make": "HYUNDAI",
+    "Model": "VENUE",
+    "Part Name": "Oil",
+    "Part Number": "5W30"
+  },
+  {
+    "Year": 2014,
+    "Make": "KIA",
+    "Model": "RIO",
+    "Part Name": "Oil Filter",
+    "Part Number": 1334
+  },
+  {
+    "Year": 2014,
+    "Make": "KIA",
+    "Model": "RIO",
+    "Part Name": "Air filter",
+    "Part Number": "9022/A9614"
+  },
+  {
+    "Year": 2014,
+    "Make": "KIA",
+    "Model": "RIO",
+    "Part Name": "Cabin Air Filter",
+    "Part Number": "4684/CAB9312"
+  },
+  {
+    "Year": 2014,
+    "Make": "KIA",
+    "Model": "RIO",
+    "Part Name": "Fuel Filter",
+    "Part Number": "n/a"
+  },
+  {
+    "Year": 2014,
+    "Make": "KIA",
+    "Model": "RIO",
+    "Part Name": "Sparkplug",
+    "Part Number": "CHA445 /NGK94017 (4X)"
+  },
+  {
+    "Year": 2014,
+    "Make": "KIA",
+    "Model": "RIO",
+    "Part Name": "Oil",
+    "Part Number": "10W40"
+  }
+]
