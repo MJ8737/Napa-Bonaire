@@ -1,17 +1,3 @@
-<script>
-const password = "MJ111894"; // change to your password
-let attempts = 0;
-
-while (true) {
-    let input = prompt("Enter password to access Car Parts Lookup:");
-    if (input === password) break;
-    attempts++;
-    if (attempts >= 3) {
-        alert("Access denied");
-        document.body.innerHTML = "<h2>Access Denied</h2>";
-        throw new Error("Access denied");
-    }
-}
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -173,3 +159,4 @@ function updatePartsTable() {
 </body>
 
 </html>
+
