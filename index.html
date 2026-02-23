@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Parts Lookup</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+select, input { margin: 5px; padding: 5px; }
+table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+th { background-color: #f2f2f2; }
+</style>
+</head>
+<body>
+
+<h2>Car Parts Lookup</h2>
+
+<label for="year">Year:</label>
+<select id="year" disabled><option value="">Select Year</option></select>
+
+<label for="make">Make:</label>
+<select id="make" disabled><option value="">Select Make</option></select>
+
+<label for="model">Model:</label>
+<select id="model" disabled><option value="">Select Model</option></select>
+
+<label for="search">Search Part:</label>
+<input type="text" id="search" placeholder="Type part name or number..." disabled />
+
+<table id="parts-table">
+<thead>
+<tr>
+<th>Part Name</th>
+<th>Part Number</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<script>
+let inventory = [];
+let filteredParts = [];
+
+const yearSelect = document.getElementById('year');
+const makeSelect = document.getElementById('make');
+const modelSelect = document.getElementById('model');
+const searchInput = document.getElementById('search');
+const partsTableBody = document.querySelector('#parts-table tbody');
+
+// Fetch the hosted JSON file
+fetch('carlist.json')
+  .then(response => response.json())
+  .then(data => {
+      inventory = data;
+      populateYears();
+      alert('Inventory loaded!');
+  })
+  .catch(error => alert('Failed to load inventory: ' + error));
+
+// Populate Year dropdown
+function populateYears() {
+    yearSelect.innerHTML = '<option value="">Select Year</option>';
+    makeSelect.innerHTML = '<option value="">Select Make</option>'; makeSelect.disabled = true;
+    modelSelect.innerHTML = '<option value="">Select Model</option>'; modelSelect.disabled = true;
+    searchInput.value = ''; searchInput.disabled = true;
+    partsTableBody.innerHTML = '';
+
+    const years = [...new Set(inventory.map(i => i.Year || i.year))].sort();
+    years.forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    });
+    yearSelect.disabled = false;
+}
+
+// Year selected → populate Make
+yearSelect.addEventListener('change', () => {
+    makeSelect.innerHTML = '<option value="">Select Make</option>';
+    modelSelect.innerHTML = '<option value="">Select Model</option>';
+    modelSelect.disabled = true;
+    searchInput.value = ''; searchInput.disabled = true;
+    partsTableBody.innerHTML = '';
+
+    if (!yearSelect.value) { makeSelect.disabled = true; return; }
+
+    const makes = [...new Set(inventory
+        .filter(i => (i.Year || i.year) == yearSelect.value)
+        .map(i => i.Make || i.make))].sort();
+    makes.forEach(make => {
+        const option = document.createElement('option');
+        option.value = make;
+        option.textContent = make;
+        makeSelect.appendChild(option);
+    });
+    makeSelect.disabled = false;
+});
+
+// Make selected → populate Model
+makeSelect.addEventListener('change', () => {
+    modelSelect.innerHTML = '<option value="">Select Model</option>';
+    searchInput.value = ''; searchInput.disabled = true;
+    partsTableBody.innerHTML = '';
+
+    if (!makeSelect.value) { modelSelect.disabled = true; return; }
+
+    const models = [...new Set(inventory
+        .filter(i => (i.Year || i.year) == yearSelect.value && (i.Make || i.make) == makeSelect.value)
+        .map(i => i.Model || i.model))].sort();
+    models.forEach(model => {
+        const option = document.createElement('option');
+        option.value = model;
+        option.textContent = model;
+        modelSelect.appendChild(option);
+    });
+    modelSelect.disabled = false;
+});
+
+// Model selected → display parts
+modelSelect.addEventListener('change', () => {
+    searchInput.value = '';
+    searchInput.disabled = !modelSelect.value;
+    updatePartsTable();
+});
+
+// Search input → filter parts
+searchInput.addEventListener('input', () => { updatePartsTable(); });
+
+function updatePartsTable() {
+    partsTableBody.innerHTML = '';
+    if (!modelSelect.value) return;
+
+    filteredParts = inventory.filter(i =>
+        (i.Year || i.year) == yearSelect.value &&
+        (i.Make || i.make) == makeSelect.value &&
+        (i.Model || i.model) == modelSelect.value
+    );
+
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    if (searchTerm) {
+        filteredParts = filteredParts.filter(p =>
+            (p['Part Name'] || p.part_name || '').toLowerCase().includes(searchTerm) ||
+            (p['Part Number'] || p.part_number || '').toLowerCase().includes(searchTerm)
+        );
+    }
+
+    filteredParts.forEach(p => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${p['Part Name'] || p.part_name || ''}</td>
+                         <td>${p['Part Number'] || p.part_number || ''}</td>`;
+        partsTableBody.appendChild(row);
+    });
+}
+</script>
+
+</body>
+</html>
