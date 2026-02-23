@@ -49,7 +49,7 @@ const searchInput = document.getElementById('search');
 const partsTableBody = document.querySelector('#parts-table tbody');
 
 // Fetch the hosted JSON file
-fetch('inventory.json')
+fetch('Napa-Bonaire/inventory.json')
   .then(response => response.json())
   .then(data => {
       inventory = data;
@@ -158,3 +158,4 @@ function updatePartsTable() {
 </body>
 
 </html>
+
