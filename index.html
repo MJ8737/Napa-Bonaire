@@ -1,27 +1,3 @@
-<script>
-const password = "MJ111894"; // change to your password
-let attempts = 0;
-
-while (true) {
-    let input = prompt("Enter password to access Car Parts Lookup:");
-    if (input === password) break;
-    attempts++;
-    if (attempts >= 3) {
-        alert("Access denied");
-        document.body.innerHTML = "<h2>Access Denied</h2>";
-        throw new Error("Access denied");
-    }
-}
-<html >
-<head>
-    <title>Document</title>
-</head>
-<body bgcolor="yellow" >
-    <h1>Hi my name is Tim</h1>
-</body> 
-</html>
-</script>
-</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,148 +16,181 @@ th { background-color: #f2f2f2; }
 
 <h2>Car Parts Lookup</h2>
 
-<label for="year">Year:</label>
-<select id="year" disabled><option value="">Select Year</option></select>
+<label>Make:</label>
+<select id="make" disabled>
+    <option value="">Select Make</option>
+</select>
 
-<label for="make">Make:</label>
-<select id="make" disabled><option value="">Select Make</option></select>
+<label>Model:</label>
+<select id="model" disabled>
+    <option value="">Select Model</option>
+</select>
 
-<label for="model">Model:</label>
-<select id="model" disabled><option value="">Select Model</option></select>
+<label>Year:</label>
+<select id="year" disabled>
+    <option value="">Select Year</option>
+</select>
 
-<label for="search">Search Part:</label>
+<label>Search Part:</label>
 <input type="text" id="search" placeholder="Type part name or number..." disabled />
 
-<table id="parts-table">
+<table>
 <thead>
 <tr>
 <th>Part Name</th>
 <th>Part Number</th>
 </tr>
 </thead>
-<tbody></tbody>
+<tbody id="parts-body"></tbody>
 </table>
 
 <script>
+
 let inventory = [];
 let filteredParts = [];
 
-const yearSelect = document.getElementById('year');
 const makeSelect = document.getElementById('make');
 const modelSelect = document.getElementById('model');
+const yearSelect = document.getElementById('year');
 const searchInput = document.getElementById('search');
-const partsTableBody = document.querySelector('#parts-table tbody');
+const partsBody = document.getElementById('parts-body');
 
-// Fetch the hosted JSON file
-fetch('inventory.json')
-  .then(response => response.json())
-  .then(data => {
-      inventory = data;
-      populateYears();
-      alert('Inventory loaded!');
-  })
-  .catch(error => alert('Failed to load inventory: ' + error));
 
-// Populate Year dropdown
-function populateYears() {
-    yearSelect.innerHTML = '<option value="">Select Year</option>';
-    makeSelect.innerHTML = '<option value="">Select Make</option>'; makeSelect.disabled = true;
-    modelSelect.innerHTML = '<option value="">Select Model</option>'; modelSelect.disabled = true;
-    searchInput.value = ''; searchInput.disabled = true;
-    partsTableBody.innerHTML = '';
+// Load inventory from GitHub
+fetch('./inventory.json')
+.then(response => response.json())
+.then(data => {
+    inventory = data;
+    populateMakes();
+})
+.catch(error => alert("Error loading inventory: " + error));
 
-    const years = [...new Set(inventory.map(i => i.Year || i.year))].sort();
-    years.forEach(year => {
-        const option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option);
-    });
-    yearSelect.disabled = false;
-}
 
-// Year selected → populate Make
-yearSelect.addEventListener('change', () => {
+// Populate Make dropdown
+function populateMakes() {
     makeSelect.innerHTML = '<option value="">Select Make</option>';
-    modelSelect.innerHTML = '<option value="">Select Model</option>';
-    modelSelect.disabled = true;
-    searchInput.value = ''; searchInput.disabled = true;
-    partsTableBody.innerHTML = '';
+    const makes = [...new Set(inventory.map(i => i.Make))].sort();
 
-    if (!yearSelect.value) { makeSelect.disabled = true; return; }
-
-    const makes = [...new Set(inventory
-        .filter(i => (i.Year || i.year) == yearSelect.value)
-        .map(i => i.Make || i.make))].sort();
     makes.forEach(make => {
         const option = document.createElement('option');
         option.value = make;
         option.textContent = make;
         makeSelect.appendChild(option);
     });
+
     makeSelect.disabled = false;
-});
+}
 
-// Make selected → populate Model
+
+// When Make changes → Populate Model
 makeSelect.addEventListener('change', () => {
+
     modelSelect.innerHTML = '<option value="">Select Model</option>';
-    searchInput.value = ''; searchInput.disabled = true;
-    partsTableBody.innerHTML = '';
+    yearSelect.innerHTML = '<option value="">Select Year</option>';
+    yearSelect.disabled = true;
+    searchInput.disabled = true;
+    partsBody.innerHTML = '';
 
-    if (!makeSelect.value) { modelSelect.disabled = true; return; }
+    if (!makeSelect.value) {
+        modelSelect.disabled = true;
+        return;
+    }
 
-    const models = [...new Set(inventory
-        .filter(i => (i.Year || i.year) == yearSelect.value && (i.Make || i.make) == makeSelect.value)
-        .map(i => i.Model || i.model))].sort();
+    const models = [...new Set(
+        inventory
+        .filter(i => i.Make === makeSelect.value)
+        .map(i => i.Model)
+    )].sort();
+
     models.forEach(model => {
         const option = document.createElement('option');
         option.value = model;
         option.textContent = model;
         modelSelect.appendChild(option);
     });
+
     modelSelect.disabled = false;
 });
 
-// Model selected → display parts
+
+// When Model changes → Populate Year
 modelSelect.addEventListener('change', () => {
-    searchInput.value = '';
-    searchInput.disabled = !modelSelect.value;
-    updatePartsTable();
+
+    yearSelect.innerHTML = '<option value="">Select Year</option>';
+    searchInput.disabled = true;
+    partsBody.innerHTML = '';
+
+    if (!modelSelect.value) {
+        yearSelect.disabled = true;
+        return;
+    }
+
+    const years = [...new Set(
+        inventory
+        .filter(i => i.Make === makeSelect.value && i.Model === modelSelect.value)
+        .map(i => i.Year)
+    )].sort((a, b) => b - a); // newest first
+
+    years.forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    });
+
+    yearSelect.disabled = false;
 });
 
-// Search input → filter parts
-searchInput.addEventListener('input', () => { updatePartsTable(); });
 
-function updatePartsTable() {
-    partsTableBody.innerHTML = '';
-    if (!modelSelect.value) return;
+// When Year changes → Show Parts
+yearSelect.addEventListener('change', () => {
+    searchInput.disabled = !yearSelect.value;
+    updateParts();
+});
+
+
+// Search filter
+searchInput.addEventListener('input', () => {
+    updateParts();
+});
+
+
+function updateParts() {
+
+    partsBody.innerHTML = '';
+
+    if (!yearSelect.value) return;
 
     filteredParts = inventory.filter(i =>
-        (i.Year || i.year) == yearSelect.value &&
-        (i.Make || i.make) == makeSelect.value &&
-        (i.Model || i.model) == modelSelect.value
+        i.Make === makeSelect.value &&
+        i.Model === modelSelect.value &&
+        i.Year == yearSelect.value
     );
 
-    const searchTerm = searchInput.value.trim().toLowerCase();
+    const searchTerm = searchInput.value.toLowerCase();
+
     if (searchTerm) {
         filteredParts = filteredParts.filter(p =>
-            (p['Part Name'] || p.part_name || '').toLowerCase().includes(searchTerm) ||
-            (p['Part Number'] || p.part_number || '').toLowerCase().includes(searchTerm)
+            p["Part Name"].toLowerCase().includes(searchTerm) ||
+            p["Part Number"].toLowerCase().includes(searchTerm)
         );
     }
 
     filteredParts.forEach(p => {
         const row = document.createElement('tr');
-        row.innerHTML = `<td>${p['Part Name'] || p.part_name || ''}</td>
-                         <td>${p['Part Number'] || p.part_number || ''}</td>`;
-        partsTableBody.appendChild(row);
+        row.innerHTML = `
+            <td>${p["Part Name"]}</td>
+            <td>${p["Part Number"]}</td>
+        `;
+        partsBody.appendChild(row);
     });
 }
+
 </script>
 
 </body>
-
 </html>
+
 
 
 
